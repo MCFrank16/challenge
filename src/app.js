@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(router);
 
 app.get('/', (req, res) => {
-    res.send('welcome to the world');
+    res.send('welcome to the application');
 })
 
 const port = process.env.PORT;
