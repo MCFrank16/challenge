@@ -4,14 +4,23 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = require('./routes');
 
+app.set('view engine', 'ejs');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(router);
 
-app.get('/', (req, res) => {
-    res.send('welcome to the application');
+app.get('/apply', (req, res) => {
+    res.render('pages/apply');
+});
+
+app.get('/login', (req, res) => {
+    res.render('pages/login');
+});
+
+app.get('/resources', (req, res) => {
+    res.render('pages/resource');
 })
 
 const port = process.env.PORT;
