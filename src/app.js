@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(router);
 
-app.get('/apply', (req, res) => {
+app.get('/', (req, res) => {
     res.render('pages/apply');
 });
 
