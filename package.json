@@ -4,7 +4,7 @@
   "description": "server side of the bk challenge",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/app.js",
     "frontend": "npm run start --prefix frontend",
     "backend": "nodemon --exec node src/app.js",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
