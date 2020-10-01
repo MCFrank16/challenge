@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <table id="paginationSimpleNumbers" class="table" width="100%">
+        <thead>
+          <tr>
+            <th class="th-sm">Firstname</th>
+            <th class="th-sm">Lastname</th>
+            <th class="th-sm">Email</th>
+            <th class="th-sm">Phonenumber</th>
+            <th class="th-sm">Location</th>
+            <th class="th-sm">Created date</th>
+            <th class="th-sm">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Frank</td>
+            <td>Mutabazi</td>
+            <td>mecfrank16@gmail.com</td>
+            <td>+25078989898</td>
+            <td>Kigali</td>
+            <td>2011/04/25</td>
+            <td>
+                <button type="button" class="btn btn-primary">View</button>
+                <button type="button" class="btn btn-success">Accept</button>
+                <button type="button" class="btn btn-danger">Reject</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Castro</td>
+            <td>Kanuma</td>
+            <td>mecfrank16@gmail.com</td>
+            <td>+25078989898</td>
+            <td>Kigali</td>
+            <td>2011/04/25</td>
+            <td>
+                <button type="button" class="btn btn-primary">View</button>
+                <button type="button" class="btn btn-success">Accept</button>
+                <button type="button" class="btn btn-danger">Reject</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Frank</td>
+            <td>Cyuzuzo</td>
+            <td>mecfrank16@gmail.com</td>
+            <td>+25078989898</td>
+            <td>Kigali</td>>
+            <td>2011/04/25</td>
+            <td>
+                <button type="button" class="btn btn-primary">View</button>
+                <button type="button" class="btn btn-success">Accept</button>
+                <button type="button" class="btn btn-danger">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Phonenumber</th>
+            <th>Location</th>
+            <th>Created date</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+      </table>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
+
+<style>
+    body { 
+      padding-top:50px; 
+    }
+
+    main{
+        width: 100%;
+        height: 100%;
+        padding-top: 25px;
+    }
+
+    .center{
+        margin: auto;
+        width: 65%;
+        height: 100%;
+        padding: 10px;
+    }
+
+    .btn-submit{
+        width: 50%;
+    }
+</style>
