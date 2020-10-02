@@ -12,7 +12,7 @@ router.patch('/applications/:id/status', updateStatus)
 
 // login routes
 router.post('/signup', createUser);
-router.post('/login', loginUser);
+router.post('/signin', loginUser);
 router.get('/logout', logout);
 
 module.exports = router;
