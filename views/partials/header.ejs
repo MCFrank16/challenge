@@ -5,11 +5,18 @@
         <% if(!token || (token && url === '/')) { %>
         <a type="button" class="btn btn-outline-light btn-lg" id="login" href="/login">Login</a>
         <%} else {%>
-          <a type="button" class="btn btn-outline-light btn-lg" id="login" href="/">Logout</a>
+          <a type="button" class="btn btn-outline-light btn-lg" id="logout">Logout</a>
         <% } %>
       </li>
     </ul>
 </nav>
+
+<script>
+  const button = document.getElementById('logout');
+    button.addEventListener('click', () => {
+     window.location.pathname = '/logout'
+    });
+</script>
 
 <style>
    .navbar-brand{
