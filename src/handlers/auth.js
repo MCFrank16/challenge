@@ -9,9 +9,14 @@ async function createUser(req, res){
    
    const id = v4().toString();
    const hashed = hashPassword(password);
-
-   await db.database.exec(insertUser(id, userName, hashed, Date.now().toString()));
-   res.status(201).send({ message: 'user saved' });
+   try {
+    await db.database.exec(insertUser(id, userName, hashed, Date.now().toString()));
+    return res.status(201).send({ message: 'user saved' });
+   } catch (error) {
+     console.debug(error);
+     return res.status(500).send();
+   }
+   
 
 }
 
