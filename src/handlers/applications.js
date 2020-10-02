@@ -23,7 +23,7 @@ async function submitApplication(req, res) {
    } 
 }
 
-async function getApplications(req, res) {
+async function getApplications(req, res, next) {
     var { from } = (req.query || {});
     from = parseInt(from, 10);
     if (!from) {
@@ -31,10 +31,10 @@ async function getApplications(req, res) {
     }
     try {
         const applications = await db.database.all(getApplicants(from));
-        res.status(200).send({ applications });
+        req.applications = applications;
+        return next();
     } catch(err) {
-        console.debug(err);
-        res.status(500).send();
+        return err;
     }
 }
 

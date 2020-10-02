@@ -23,47 +23,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Frank</td>
-            <td>Mutabazi</td>
-            <td>mecfrank16@gmail.com</td>
-            <td>+25078989898</td>
-            <td>Kigali</td>
-            <td>2011/04/25</td>
-            <td>
-                <button type="button" class="btn btn-primary">View</button>
-                <button type="button" class="btn btn-success">Accept</button>
-                <button type="button" class="btn btn-danger">Reject</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Castro</td>
-            <td>Kanuma</td>
-            <td>mecfrank16@gmail.com</td>
-            <td>+25078989898</td>
-            <td>Kigali</td>
-            <td>2011/04/25</td>
-            <td>
-                <button type="button" class="btn btn-primary">View</button>
-                <button type="button" class="btn btn-success">Accept</button>
-                <button type="button" class="btn btn-danger">Reject</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Frank</td>
-            <td>Cyuzuzo</td>
-            <td>mecfrank16@gmail.com</td>
-            <td>+25078989898</td>
-            <td>Kigali</td>>
-            <td>2011/04/25</td>
-            <td>
-                <button type="button" class="btn btn-primary">View</button>
-                <button type="button" class="btn btn-success">Accept</button>
-                <button type="button" class="btn btn-danger">Reject</button>
-            </td>
-          </tr>
+          <% applications.forEach((data) => { %>
+            <tr id=<% data.id %>>
+              <td><%= data.firstName%></td>
+              <td><%= data.lastName%></td>
+              <td><%= data.email%></td>
+              <td><%= data.phoneNumber%></td>
+              <td><%= data.location%></td>
+              <td><%= data.createdAt%></td>
+              <td>
+                  <button type="button" class="btn btn-primary">View</button>
+                  <button type="button" class="btn btn-success">Accept</button>
+                  <button type="button" class="btn btn-danger">Reject</button>
+              </td>
+            </tr>
+         <% }); %>
         </tbody>
         <tfoot>
           <tr>
