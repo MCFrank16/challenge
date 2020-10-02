@@ -4,13 +4,13 @@ const { insertUser, getUser } = require('../helper/queries');
 const { hashPassword, verifyPassword, signToken } = require('../helper/hashPassword');
 
 async function createUser(req, res){
-   const { userName, password } = req.body;
-   if(!userName || !password) return res.status(400).send();
+   const { username, password } = req.body;
+   if(!username || !password) return res.status(400).send();
    
    const id = v4().toString();
    const hashed = hashPassword(password);
    try {
-    await db.database.exec(insertUser(id, userName, hashed, Date.now().toString()));
+    await db.database.exec(insertUser(id, username, hashed, Date.now().toString()));
     return res.status(201).send({ message: 'user saved' });
    } catch (error) {
      console.debug(error);
@@ -20,12 +20,12 @@ async function createUser(req, res){
 }
 
 async function loginUser(req, res) {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
     try {
-        if(!userName || !password) return res.status(400).send();
+        if(!username || !password) return res.status(400).send();
 
-    const user = await db.database.all(getUser(userName));
-    const token = await signToken({ user: user[0].userName }, '24h');
+    const user = await db.database.all(getUser(username));
+    const token = await signToken({ user: user[0].username }, '24h');
 
     if(user){
         if(!verifyPassword(user[0].password, password)) {

@@ -39,6 +39,6 @@ module.exports = {
        VALUES('${id}', '${username}', '${password}', '${createdAt}')
     `,
     getUser: (username) => `
-       SELECT userName, password FROM users WHERE userName = '${username}'
+       SELECT username, password FROM users WHERE username = '${username}'
     `
 }

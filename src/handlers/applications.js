@@ -5,18 +5,17 @@ const db = require('../helper/db');
 const { insertApplicant, getApplicants, getCV, updateApplication } = require('../helper/queries');
 
 async function submitApplication(req, res) {
-   if (req.errorFile  === errorMessage) return res.status(400).send({ status: 'failed', message: errorMessage });
-   if (!req.body) return res.status(400).send({ status: 'failed', message: "fill all the fields" });
    try {
-    const { firstName, lastName, email, phoneNumber, location} = req.body;
-    if (!(firstName || lastName || email || phoneNumber || location)) {
-        return res.status(400).send({ status: 'failed', message: "fill all the fields" });
-    }
+    if (!req.body) return res.status(400).send({ status: 'failed', message: "fill all the fields" });
+
+    const { firstname, lastname, email, phonenumber, location} = req.body;
+
     const cv = req.file.path;
     const id = v4().toString();
     const mimetype = req.file.mimetype;
-    await db.database.exec(insertApplicant(id, firstName, lastName, email, phoneNumber, location, cv, 'submitted', Date.now().toString(), mimetype));
-    res.status(201).send();
+    await db.database.exec(insertApplicant(id, firstname, lastname, email, phonenumber, location, cv, 'submitted', new Date().toLocaleString(), mimetype));
+
+    res.status(201).redirect('/');
    } catch(err) {
        console.debug(err);
        res.status(500).send();
