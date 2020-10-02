@@ -16,7 +16,7 @@ async function submitApplication(req, res) {
     const id = v4().toString();
     const mimetype = req.file.mimetype;
     await db.database.exec(insertApplicant(id, firstName, lastName, email, phoneNumber, location, cv, 'submitted', Date.now().toString(), mimetype));
-    res.status(201).send({message: 'application sent'});
+    res.status(201).send();
    } catch(err) {
        console.debug(err);
        res.status(500).send();

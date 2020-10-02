@@ -2,7 +2,11 @@
     <a class="navbar-brand text-white" href="/">SJA</a>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-light btn-lg">Login</button>
+        <% if(!token) { %>
+        <a type="button" class="btn btn-outline-light btn-lg" id="login" href="/login">Login</a>
+        <%} else {%>
+          <a type="button" class="btn btn-outline-light btn-lg" id="login" href="/">Logout</a>
+        <% } %>
       </li>
     </ul>
 </nav>
@@ -11,5 +15,10 @@
    .navbar-brand{
        font-size: 2.5rem;
        font-family: 'Tenor';
+   };
+   .btn {
+     text-decoration: none;
+     color: white;
    }
+
 </style>

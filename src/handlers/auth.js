@@ -16,11 +16,11 @@ async function createUser(req, res){
 }
 
 async function loginUser(req, res) {
-    const { userName, password } = req.body;
-    if(!userName || !password) return res.status(400).send();
+    const { username, password } = req.body;
+    if(!username || !password) return res.status(400).send();
 
-    const user = await db.database.all(getUser(userName));
-    const token = await signToken({ user: user[0].userName }, '24h');
+    const user = await db.database.all(getUser(username));
+    const token = await signToken({ user: user[0].username }, '24h');
 
     if(user){
         if(!verifyPassword(user[0].password, password)) {
@@ -33,8 +33,7 @@ async function loginUser(req, res) {
             // forces to use https in production
             secure: process.env.NODE_ENV === 'production',
         };
-        res.cookie('token', token, cookieValidation);
-        return res.status(200).send();
+        res.status(200).cookie('token', token, cookieValidation).redirect('/resources');
     }
     return res.status(401).send();
 }
