@@ -1,6 +1,5 @@
 const { v4 } = require('uuid');
 const fs = require('fs');
-const { errorMessage } = require('../middlewares/multer');
 const db = require('../helper/db');
 const { insertApplicant, getApplicants, getCV, updateApplication, deleteApplication } = require('../helper/queries');
 
@@ -72,7 +71,9 @@ async function updateStatus(req, res){
 async function removeApplication(req, res){
     var { id } = (req.params || {});
     try {
+        const app  = await db.database.all(getCV(id));
         await db.database.exec(deleteApplication(id));
+        fs.unlinkSync(app[0].cv);
         res.status(200).send();
     } catch (error) {
         console.debug(error);
