@@ -35,10 +35,13 @@ module.exports = {
        UPDATE applications SET status = '${status}' WHERE id = '${id}'
     `,
     insertUser: (id, username, password, createdAt) => `
-       INSERT INTO users(id, userName, password, createdAt)
+       INSERT INTO users(id, username, password, createdAt)
        VALUES('${id}', '${username}', '${password}', '${createdAt}')
     `,
     getUser: (username) => `
        SELECT username, password FROM users WHERE username = '${username}'
+    `,
+    deleteUser: (username) => `
+       DELETE FROM users WHERE username = '${username}'
     `
 }

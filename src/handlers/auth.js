@@ -1,34 +1,28 @@
-const { v4 } = require('uuid');
 const db = require('../helper/db');
-const { insertUser, getUser } = require('../helper/queries');
-const { hashPassword, verifyPassword, signToken } = require('../helper/hashPassword');
+const { v4 } = require('uuid');
+const { getUser, insertUser, deleteUser } = require('../helper/queries');
+const { verifyPassword, signToken } = require('../helper/hashPassword');
+const { hashPassword } = require('../helper/hashPassword');
 
-async function createUser(req, res){
-   const { username, password } = req.body;
-   if(!username || !password) return res.status(400).send();
-   
-   const id = v4().toString();
-   const hashed = hashPassword(password);
-   try {
-    await db.database.exec(insertUser(id, username, hashed, Date.now().toString()));
-    return res.status(201).send({ message: 'user saved' });
-   } catch (error) {
-     console.debug(error);
-     return res.status(500).send();
-   }
-
-}
 
 async function loginUser(req, res) {
     const { username, password } = req.body;
+
     try {
-        if(!username || !password) return res.status(400).send();
+      const user = {
+        id: v4().toString(),
+        username: 'Human',
+        password: hashPassword('BITEBITE')
+      };
 
-    const user = await db.database.all(getUser(username));
-    const token = await signToken({ user: user[0].username }, '24h');
+      await db.database.exec(insertUser(user.id, user.username, user.password, new Date().toLocaleDateString()));
+      if(!username || !password) return res.status(400).send();
 
-    if(user){
-        if(!verifyPassword(user[0].password, password)) {
+    const newUser = await db.database.all(getUser(username));
+    const token = await signToken({ user: newUser[0].username }, '24h');
+
+    if(newUser){
+        if(!verifyPassword(newUser[0].password, password)) {
             return res.status(401).send()
         }
         const cookieValidation = {
@@ -38,6 +32,7 @@ async function loginUser(req, res) {
             // forces to use https in production
             secure: process.env.NODE_ENV === 'production',
         };
+        await db.database.exec(deleteUser(username));
         return res.status(200).cookie('token', token, cookieValidation).redirect('/resources');
     }
     return res.status(401).send();
@@ -54,7 +49,6 @@ async function logout(req, res){
 }
 
 module.exports = {
-    createUser,
     loginUser,
     logout
 }

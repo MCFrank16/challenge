@@ -12,7 +12,7 @@ const db = {};
             driver: sqlite3.Database
         })
         await d.exec(createTableApplications);
-        await d.exec(createTableUsers);
+        await d.exec(createTableUsers);       
         db.database = d;
     } catch(err) {
         console.debug(err);
