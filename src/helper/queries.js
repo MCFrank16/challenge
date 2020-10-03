@@ -26,7 +26,7 @@ module.exports = {
        VALUES('${id}', '${firstname}', '${lastname}', '${email}', '${phonenumber}', '${location}', '${cv}', '${status}', '${createdAt}', '${mimetype}')
     `,
     getApplicants: (from) => `
-       SELECT * FROM applications ORDER BY firstName LIMIT ${from}, 10
+       SELECT * FROM applications ORDER BY firstname LIMIT ${from}, 10
     `,
     getCV: (id) => `
        SELECT cv, mimetype FROM applications WHERE id = '${id}'
