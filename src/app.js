@@ -1,5 +1,5 @@
 require('dotenv').config();
-const app = require('express')();
+const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -7,7 +7,10 @@ const checkToken = require('../src/middlewares/checkToken');
 const { getApplications } = require('../src/handlers/applications');
 const router = require('./routes');
 
+const app = express();
 app.set('view engine', 'ejs');
+
+app.use(express.static(process.cwd() + '/public'));
 
 app.use(cors());
 app.use(cookieParser());

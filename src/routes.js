@@ -7,7 +7,7 @@ const { createUser, loginUser, logout } = require('./handlers/auth');
 router.post('/applications', upload, submitApplication);
 router.get('/applications', getApplications);
 router.get('/applications/:id/cv', getApplicationCV);
-router.patch('/applications/:id/status', updateStatus)
+router.get('/applications/:id', updateStatus)
 
 
 // login routes

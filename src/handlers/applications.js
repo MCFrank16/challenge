@@ -13,7 +13,7 @@ async function submitApplication(req, res) {
     const cv = req.file.path;
     const id = v4().toString();
     const mimetype = req.file.mimetype;
-    await db.database.exec(insertApplicant(id, firstname, lastname, email, phonenumber, location, cv, 'submitted', new Date().toLocaleString(), mimetype));
+    await db.database.exec(insertApplicant(id, firstname, lastname, email, phonenumber, location, cv, 'pending', new Date().toLocaleString(), mimetype));
 
     res.status(201).redirect('/');
    } catch(err) {
@@ -56,12 +56,13 @@ async function getApplicationCV(req, res){
 }
 
 async function updateStatus(req, res){
-    const { status } = req.body;
+    const { status } = req.query;
+
     var { id } = (req.params || {});
     try {
         if (!status) return res.status(400).send();
         await db.database.exec(updateApplication(id, status));
-        res.status(200).send();
+        res.status(200).redirect('/resources');
     } catch (error) {
        console.debug(error);
        res.status(500).send();

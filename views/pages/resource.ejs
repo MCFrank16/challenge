@@ -18,7 +18,7 @@
             <th class="th-sm">Email</th>
             <th class="th-sm">Phonenumber</th>
             <th class="th-sm">Location</th>
-            <th class="th-sm">Created date</th>
+            <th class="th-sm">Status</th>
             <th class="th-sm">Actions</th>
           </tr>
         </thead>
@@ -30,11 +30,11 @@
               <td><%= data.email%></td>
               <td><%= data.phoneNumber%></td>
               <td><%= data.location%></td>
-              <td><%= data.createdAt%></td>
+              <td><%= data.status%></td>
               <td>
-                  <button type="button" class="btn btn-primary">View</button>
-                  <button type="button" class="btn btn-success">Accept</button>
-                  <button type="button" class="btn btn-danger">Reject</button>
+                  <a type="button" class="btn btn-primary" href="applications/<%= data.id%>/cv">View</a>
+                  <a type="button" class="btn btn-success" href="applications/<%= data.id%>?status=accepted">Accept</a>
+                  <a type="button" class="btn btn-danger" href="applications/<%= data.id%>?status=rejected">Reject</a>
               </td>
             </tr>
          <% }); %>
@@ -46,7 +46,7 @@
             <th>Email</th>
             <th>Phonenumber</th>
             <th>Location</th>
-            <th>Created date</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </tfoot>
@@ -60,25 +60,3 @@
 </body>
 </html>
 
-<style>
-    body { 
-      padding-top:50px; 
-    }
-
-    main{
-        width: 100%;
-        height: 100%;
-        padding-top: 25px;
-    }
-
-    .center{
-        margin: auto;
-        width: 65%;
-        height: 100%;
-        padding: 10px;
-    }
-
-    .btn-submit{
-        width: 50%;
-    }
-</style>
