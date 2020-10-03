@@ -1,8 +1,10 @@
 require('dotenv').config();
 const multer = require('multer');
-const path = require('path');
+const { resolve, join } = require('path');
 
-const storage = multer.diskStorage({});
+const storage = multer.diskStorage({
+  destination: join(resolve('src') + '/assets')
+});
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === 'application/pdf') {

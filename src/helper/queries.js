@@ -28,6 +28,9 @@ module.exports = {
     getApplicants: (from) => `
        SELECT * FROM applications ORDER BY firstname LIMIT ${from}, 10
     `,
+    deleteApplication: (id) => `
+       DELETE FROM applications WHERE id = '${id}'
+    `,
     getCV: (id) => `
        SELECT cv, mimetype FROM applications WHERE id = '${id}'
     `,

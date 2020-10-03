@@ -2,10 +2,9 @@ const { v4 } = require('uuid');
 const fs = require('fs');
 const { errorMessage } = require('../middlewares/multer');
 const db = require('../helper/db');
-const { insertApplicant, getApplicants, getCV, updateApplication } = require('../helper/queries');
+const { insertApplicant, getApplicants, getCV, updateApplication, deleteApplication } = require('../helper/queries');
 
 async function submitApplication(req, res) {
-   console.log(req.body);
    try {
     if (!req.body) return res.status(400).send({ status: 'failed', message: "fill all the fields" });
 
@@ -70,4 +69,16 @@ async function updateStatus(req, res){
     }
 }
 
-module.exports = { getApplications, submitApplication, getApplicationCV, updateStatus };
+async function removeApplication(req, res){
+    var { id } = (req.params || {});
+    try {
+        await db.database.exec(deleteApplication(id));
+        res.status(200).send();
+    } catch (error) {
+        console.debug(error);
+        res.status(500).send()
+    }
+
+}
+
+module.exports = { getApplications, submitApplication, getApplicationCV, updateStatus, removeApplication };
