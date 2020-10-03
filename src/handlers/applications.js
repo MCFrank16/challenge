@@ -1,5 +1,6 @@
 const { v4 } = require('uuid');
 const fs = require('fs');
+const { errorMessage } = require('../middlewares/multer');
 const db = require('../helper/db');
 const { insertApplicant, getApplicants, getCV, updateApplication } = require('../helper/queries');
 
@@ -12,7 +13,7 @@ async function submitApplication(req, res) {
     const cv = req.file.path;
     const id = v4().toString();
     const mimetype = req.file.mimetype;
-    await db.database.exec(insertApplicant(id, firstname, lastname, email, phonenumber, location, cv, 'pending', new Date().toLocaleDateString(), mimetype));
+    await db.database.exec(insertApplicant(id, firstname, lastname, email, phonenumber, location, cv, 'pending', new Date().toLocaleString(), mimetype));
 
     res.status(201).redirect('/');
    } catch(err) {
