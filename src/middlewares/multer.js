@@ -3,7 +3,7 @@ const multer = require('multer');
 const { resolve, join } = require('path');
 
 const storage = multer.diskStorage({
-  destination: join(resolve('src') + '/assets')
+  destination: join(resolve(`${process.cwd()}/src`) + '/assets')
 });
 
 const fileFilter = (req, file, cb) => {
